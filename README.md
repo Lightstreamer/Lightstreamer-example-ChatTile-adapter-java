@@ -32,12 +32,13 @@ If you want to install a version of this demo in your local Lightstreamer Server
 ## Build
 To build your own version of `LS_ChatTile_Demo_Adapters.jar`, instead of using the one provided in the `deploy.zip` file from the [Install](https://github.com/Weswit/Lightstreamer-example-ChatTile-adapter-java#install) section above, follow these steps:
 * Download this project.
-* Get the `ls-adapter-interface.jar` and `log4j-1.2.15.jar` files from the [latest Lightstreamer distribution](http://www.lightstreamer.com/download), and copy them into the `lib` directory.
-* Get the `ua-parser-1.2.2.jar` file from [ua_parser Java Library](https://github.com/tobie/ua-parser/tree/master/java), and copy it into the `lib` directory.
-* Get the `snakeyaml-1.11.jar` files from [SnakeYAML](https://code.google.com/p/snakeyaml/), and copy it into the `lib` directory.
+* Get the `ls-adapter-interface.jar` file from the [latest Lightstreamer distribution](http://www.lightstreamer.com/download), and copy it into the `lib` folder.
+* Get the `log4j-1.2.17.jar` file from [Apache log4j](https://logging.apache.org/log4j/1.2/) and copy it into the `lib` folder.
+* Get the `ua-parser-1.2.2.jar` file from [ua_parser Java Library](https://github.com/tobie/ua-parser/tree/master/java), and copy it into the `lib` folder.
+* Get the `snakeyaml-1.11.jar` file from [SnakeYAML](https://code.google.com/p/snakeyaml/), and copy it into the `lib` folder.
 * Build the jar `LS_ChatTile_Demo_Adapters.jar` with commands like these:
 ```sh
- >javac -source 1.7 -target 1.7 -nowarn -g -classpath lib/log4j-1.2.15.jar;lib/ls-adapter-interface.jar;lib/jbox2d-library-2.2.1.1.jar;lib/ua-parser-1.2.2.jar;lib/snakeyaml-1.11.jar -sourcepath src/ -d tmp_classes src/com/lightstreamer/adapters/ChatTileDemo/ChatTileAdapter.java
+ >javac -source 1.7 -target 1.7 -nowarn -g -classpath lib/log4j-1.2.17.jar;lib/ls-adapter-interface.jar;lib/jbox2d-library-2.2.1.1.jar;lib/ua-parser-1.2.2.jar;lib/snakeyaml-1.11.jar -sourcepath src/ -d tmp_classes src/com/lightstreamer/adapters/ChatTileDemo/ChatTileAdapter.java
  
  >jar cvf LS_ChatTile_Demo_Adapters.jar -C tmp_classes com
 ```
