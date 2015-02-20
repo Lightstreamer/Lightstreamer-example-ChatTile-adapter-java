@@ -19,6 +19,45 @@ The Data Adapter accepts message submission for the unique chat room. The sender
 The Metadata Adapter inherits from the reusable [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) and just adds a simple support for message submission. It should not be used as a reference for a real case of client-originated message handling, as no guaranteed delivery and no clustering support is shown.
 <!-- END DESCRIPTION lightstreamer-example-chattile-adapter-java -->
 
+
+### The Adapter Set Configuration
+
+This Adapter Set is configured and will be referenced by the clients as `CHATTILE`. 
+
+The `adapters.xml` file for the *Chat-Tile Demo*, should look like:
+
+```xml      
+<?xml version="1.0"?>
+<adapters_conf id="CHATTILE">
+    <metadata_provider>
+        <adapter_class>com.lightstreamer.adapters.ChatTileDemo.ChatTileMetaAdapter</adapter_class>
+
+        <!--
+          TCP port on which Sun/Oracle's JMXMP connector will be
+          listening.
+        -->
+        <param name="jmxPort">9999</param>
+        
+        <messages_pool>
+            <max_size>10</max_size>
+            <max_free>10</max_free>
+        </messages_pool>
+        
+    </metadata_provider>
+    
+    <data_provider>
+        <adapter_class>com.lightstreamer.adapters.ChatTileDemo.ChatTileAdapter</adapter_class>
+          
+    </data_provider>
+</adapters_conf>
+
+```
+
+<i>NOTE: not all configuration options of an Adapter Set are exposed by the file suggested above. 
+You can easily expand your configurations using the generic template, `DOCS-SDKs/sdk_adapter_java_inprocess/doc/adapter_conf_template/adapters.xml`, as a reference.</i><br>
+<br>
+Please refer [here](http://www.lightstreamer.com/docs/base/Lightstreamer/DOCS-SDKs/General%20Concepts.pdf) for more details about Lightstreamer Adapters.
+
 ## Install
 If you want to install a version of this demo in your local Lightstreamer Server, follow these steps:
 * Download *Lightstreamer Server* (Lightstreamer Server comes with a free non-expiring demo license for 20 connected users) from [Lightstreamer Download page](http://www.lightstreamer.com/download.htm), and install it, as explained in the `GETTING_STARTED.TXT` file in the installation home directory.
