@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import ua_parser.Client;
 import ua_parser.Parser;
@@ -87,6 +88,16 @@ public class ChatTileMetaAdapter extends LiteralBasedProvider {
     @Override
     public void init(Map params, File configDir) {
 
+        String logConfig = (String) params.get("log_config");
+        if (logConfig != null) {
+            File logConfigFile = new File(configDir, logConfig);
+            String logRefresh = (String) params.get("log_config_refresh_seconds");
+            if (logRefresh != null) {
+                DOMConfigurator.configureAndWatch(logConfigFile.getAbsolutePath(), Integer.parseInt(logRefresh) * 1000);
+            } else {
+                DOMConfigurator.configure(logConfigFile.getAbsolutePath());
+            }
+        }
         logger = Logger.getLogger(ROOM_DEMO_LOGGER_NAME);
 
         try{

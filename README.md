@@ -29,9 +29,24 @@ The `adapters.xml` file for the *Chat-Tile Demo*, should look like:
 ```xml      
 <?xml version="1.0"?>
 <adapters_conf id="CHATTILE">
+
+    <!--
+      Not all configuration options of an Adapter Set are exposed by this file. 
+      You can easily expand your configurations using the generic template, 
+      `DOCS-SDKs/sdk_adapter_java_inprocess/doc/adapter_conf_template/adapters.xml`,
+      as a reference.
+    -->
+    
+    <metadata_adapter_initialised_first>Y</metadata_adapter_initialised_first>
+
     <metadata_provider>
         <adapter_class>com.lightstreamer.adapters.ChatTileDemo.ChatTileMetaAdapter</adapter_class>
 
+        <!-- Optional configuration file for the Adapter's own logging.
+             Logging is managed through log4j. -->
+        <param name="log_config">adapters_log_conf.xml</param>
+        <param name="log_config_refresh_seconds">10</param>
+  
         <!--
           TCP port on which Sun/Oracle's JMXMP connector will be
           listening.
@@ -50,7 +65,6 @@ The `adapters.xml` file for the *Chat-Tile Demo*, should look like:
           
     </data_provider>
 </adapters_conf>
-
 ```
 
 <i>NOTE: not all configuration options of an Adapter Set are exposed by the file suggested above. 
@@ -64,7 +78,7 @@ If you want to install a version of this demo in your local Lightstreamer Server
 * Get the `deploy.zip` file of the [latest release](https://github.com/Weswit/Lightstreamer-example-ChatTile-adapter-java/releases), unzip it, and copy the just unzipped `ChatTile` folder into the `adapters` folder of your Lightstreamer Server installation.
 * Get the `ua-parser-1.2.2.jar` file from [ua_parser Java Library](https://github.com/tobie/ua-parser/tree/master/java) and copy it into the `adapters/ChatTile/lib` folder.
 * Get the `snakeyaml-1.11.jar` files from [SnakeYAML](https://code.google.com/p/snakeyaml/) and copy it into the `adapters/ChatTile/lib` folder.
-* [Optional] Supply a specific "LS_ChatTileDemo_Logger" and "LS_demos_Logger" category in logback configuration `Lightstreamer/conf/lightstreamer_log_conf.xml`.
+* [Optional] Customize the specific "LS_ChatTileDemo_Logger" and "LS_demos_Logger" categories in log4j configuration file `ChatTile/adapters_log_conf.xml`.
 * Launch Lightstreamer Server.
 * Test the Adapter, launching the client listed in [Clients Using This Adapter](https://github.com/Weswit/Lightstreamer-example-ChatTile-adapter-java#clients-using-this-adapter).
 
