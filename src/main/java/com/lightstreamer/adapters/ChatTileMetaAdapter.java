@@ -151,7 +151,7 @@ public class ChatTileMetaAdapter extends LiteralBasedProvider {
         if (message.startsWith("n|") ) {
             String res = notifyNewPlayer(sessionID, removeTypeFrom(message));
             if (!res.equalsIgnoreCase("")) {
-                throw new CreditsException(-2720, res);
+                throw new CreditsException(-2720, "Notifying player name " + res + " to the client", res);
             }
         } else if ( message.startsWith("m|") ) {
             notifyChatMessage(sessionID, removeTypeFrom(message));
