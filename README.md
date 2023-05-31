@@ -41,9 +41,10 @@ The `adapters.xml` file for the *Chat-Tile Demo*, should look like:
         -->
         <param name="jmxPort">9999</param>
         
+        <!-- configure the dedicated pool for notifyUserMessage call, see source code of ChatTileMetaAdapter -->
         <messages_pool>
-            <max_size>1000</max_size>
-            <max_free>10</max_free>
+            <max_pending_requests>100</max_pending_requests>
+            <max_queue>100</max_queue>
         </messages_pool>
         
     </metadata_provider>

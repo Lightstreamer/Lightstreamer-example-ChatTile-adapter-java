@@ -21,7 +21,11 @@ package com.lightstreamer.adapters.ChatTileDemo;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -140,24 +144,42 @@ public class ChatTileMetaAdapter extends LiteralBasedProvider {
     public void notifyNewTables(String user, String sessionID, TableInfo[] tables) throws CreditsException {
     }
 
+    private static ExecutorService messageProcessingPool = Executors.newCachedThreadPool();
+
     @Override
-    public void notifyUserMessage(String user, String sessionID, String message)
+    public CompletionStage<String> notifyUserMessage(String user, String sessionID, String message)
             throws CreditsException {
 
+        //NOTE: since the message processing is potentially blocking (in a real scenario), we have 
+        //configured a dedicated ExecutorService. Moreover, to provide backpressure to the Server
+        //when the number of pending operations is too high, we have properly configured the
+        //messages thread pool in the adapters.xml configuration file for this adapter.
+
         if (message == null) {
-            return ;
+            return null;
         }
 
-        if (message.startsWith("n|") ) {
-            String res = notifyNewPlayer(sessionID, removeTypeFrom(message));
-            if (!res.equalsIgnoreCase("")) {
-                throw new CreditsException(-2720, "Notifying player name " + res + " to the client", res);
+        CompletableFuture<String> future = new CompletableFuture<>();
+        messageProcessingPool.execute(() -> {
+            try {
+                if (message.startsWith("n|") ) {
+                    String res = notifyNewPlayer(sessionID, removeTypeFrom(message));
+                    if (!res.equalsIgnoreCase("")) {
+                        throw new CreditsException(-2720, "Notifying player name " + res + " to the client", res);
+                    }
+                } else if ( message.startsWith("m|") ) {
+                    notifyChatMessage(sessionID, removeTypeFrom(message));
+                } else {
+                    logger.debug("Unknown message received: "+ message);
+                }
+                future.complete(null);
+            } catch (Throwable t) {
+                future.completeExceptionally(t);
             }
-        } else if ( message.startsWith("m|") ) {
-            notifyChatMessage(sessionID, removeTypeFrom(message));
-        } else {
-            logger.debug("Unknown message received: "+ message);
-        }
+            assert (future.isDone());
+        });
+
+        return future;
     }
 
     // Protected Methods -------------------------------------------------------
