@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -147,7 +146,7 @@ public class ChatTileMetaAdapter extends LiteralBasedProvider {
     private static ExecutorService messageProcessingPool = Executors.newCachedThreadPool();
 
     @Override
-    public CompletionStage<String> notifyUserMessage(String user, String sessionID, String message)
+    public CompletableFuture<String> notifyUserMessage(String user, String sessionID, String message)
             throws CreditsException {
 
         //NOTE: since the message processing is potentially blocking (in a real scenario), we have 
