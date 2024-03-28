@@ -62,7 +62,7 @@ You can easily expand your configurations using the generic template, see the [J
 Please refer [here](https://lightstreamer.com/docs/ls-server/latest/General%20Concepts.pdf) for more details about Lightstreamer Adapters.
 
 ## Install
-If you want to install a version of this demo in your local Lightstreamer Server, follow these steps:
+If you want to install a version of this demo on your local Lightstreamer Server, follow these steps:
 * Download *Lightstreamer Server* (Lightstreamer Server comes with a free non-expiring demo license for 20 connected users) from [Lightstreamer Download page](http://www.lightstreamer.com/download.htm), and install it, as explained in the `GETTING_STARTED.TXT` file in the installation home directory.
 * Get the `deploy.zip` file of the [latest release](https://github.com/Lightstreamer/Lightstreamer-example-ChatTile-adapter-java/releases), unzip it, and copy the just unzipped `ChatTile` folder into the `adapters` folder of your Lightstreamer Server installation.
 * [Optional] Customize the logging settings in log4j configuration file: `ChatTile/classes/log4j2.xml`.
@@ -71,9 +71,9 @@ If you want to install a version of this demo in your local Lightstreamer Server
 
 ## Build
 
-To build your own version of `example-ChatTile-adapter-java-x.y.z-SNAPSHOT.jar` instead of using the one provided in the `deploy.zip` file from the [Install](#install) section above, you have two options:
+To build your own version of `example-chattile-adapter-java-x.y.z.jar` instead of using the one provided in the `deploy.zip` file from the [Install](#install) section above, you have two options:
 either use [Maven](https://maven.apache.org/) (or other build tools) to take care of dependencies and building (recommended) or gather the necessary jars yourself and build it manually.
-For the sake of simplicity only the Maven case is detailed here.
+For the sake of simplicity, only the Maven case is detailed here.
 
 ### Maven
 
