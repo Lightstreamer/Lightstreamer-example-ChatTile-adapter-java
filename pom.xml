@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.lightstreamer</groupId>
+  <groupId>com.lightstreamer.examples</groupId>
   <artifactId>example-chattile-adapter-java</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
@@ -43,19 +43,11 @@
     </plugins>
   </build>
   
-  <!-- <repositories>
-    <repository>
-      <id>Twitter</id>
-      <name>Twitter repository</name>
-      <url>https://maven.twttr.com/</url>
-    </repository>
-  </repositories> -->
-
   <distributionManagement>
     <repository>
       <id>github</id>
       <name>GitHub Lightstreamer Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/Lightstreamer/Lightstreamer-example-ChatTile-adapter-java</url>
+      <url>https://maven.pkg.github.com/lightstreamer/Lightstreamer-example-ChatTile-adapter-java</url>
     </repository>
   </distributionManagement>
 
