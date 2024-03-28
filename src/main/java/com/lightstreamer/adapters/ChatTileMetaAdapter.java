@@ -263,31 +263,26 @@ public class ChatTileMetaAdapter extends LiteralBasedProvider {
 
     @SuppressWarnings("rawtypes")
     private void addUserAgent(String sessionID, Map sessionInfo) {
-        try {
-            String ua = (String) sessionInfo.get(FIELD_USER_AGENT);
-            if (ua == null) {
-                return;
-            }
-
-            logger.info("Usr Agent: " + ua);
-
-            Client c = new Parser().parse(ua);
-            String userAgent;
-            if ( c.userAgent.family.equals("Android") ) {
-                userAgent = c.userAgent.family + " Browser on " + c.os.family;
-            } else {
-                userAgent = c.userAgent.family + " on " + c.os.family;
-            }
-            if ( userAgent.length() > 140 ) {
-                userAgent = userAgent.substring(0,140);
-            }
-
-            usrAgnts.put(sessionID, userAgent);
-            logger.info("Saved: " + userAgent + ", for " + sessionID);
-
-        } catch (IOException ioe) {
-            logger.warn("Unable to retrieve user agent for sesion '" + sessionID + "'");
+        String ua = (String) sessionInfo.get(FIELD_USER_AGENT);
+        if (ua == null) {
+            return;
         }
+
+        logger.info("Usr Agent: " + ua);
+
+        Client c = new Parser().parse(ua);
+        String userAgent;
+        if ( c.userAgent.family.equals("Android") ) {
+            userAgent = c.userAgent.family + " Browser on " + c.os.family;
+        } else {
+            userAgent = c.userAgent.family + " on " + c.os.family;
+        }
+        if ( userAgent.length() > 140 ) {
+            userAgent = userAgent.substring(0,140);
+        }
+
+        usrAgnts.put(sessionID, userAgent);
+        logger.info("Saved: " + userAgent + ", for " + sessionID);
     }
 
     private String removeTypeFrom(String message) {
